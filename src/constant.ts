@@ -25,5 +25,13 @@ const socials = [
 		icon: 'devicon-linkedin-plain colored',
 	},
 ];
+const keywords = [
+	'Next.js',
+	'JavaScript',
+	'React.js',
+	'TypeScript',
+	'Node.JS',
+	'Express.JS',
+]; // Danh sách từ khóa
 
-export { title, position, tags, interests, about, socials };
+export { title, position, tags, interests, about, socials, keywords };

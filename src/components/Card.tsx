@@ -1,3 +1,5 @@
+import KeywordHighlighter from '../utils/KeywordHighlighter';
+
 type Props = {
 	leftContent: string;
 	title: string;
@@ -36,7 +38,9 @@ function Card(props: Props) {
 				>
 					{title}
 				</a>
-				<p className="mt-2 text-sm leading-normal text-slate-500">{content}</p>
+				<p className="mt-2 text-sm leading-normal text-slate-500">
+					{<KeywordHighlighter content={content} />}
+				</p>
 				{subContent && (
 					<ul className="mt-2 flex flex-wrap">
 						{subContent.map((item, index) => (

@@ -8,3 +8,25 @@
 	background-color: #87d1d4;
 	color: #908888; /* Màu chữ đen */
 }
+
+@keyframes rainbow {
+	0% {
+		color: #fc5c7d;
+	}
+
+	100% {
+		color: #6a82fb;
+	}
+}
+
+.highlight {
+	animation: rainbow 3s infinite linear;
+	font-weight: 600;
+}
+/* 
+.highlight {
+	font-weight: 600;
+	background: linear-gradient(to right, #fc5c7d, #6a82fb);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+} */

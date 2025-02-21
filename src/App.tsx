@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import Card from './components/Card';
-import { about, interests, position, socials, tags, title } from './constant';
+import { about, interests } from './constant';
+import SideBar from './components/SideBar';
+import { useEffect, useState } from 'react';
+import KeywordHighlighter from './utils/KeywordHighlighter';
 
 export default function App() {
 	const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -25,68 +27,10 @@ export default function App() {
 			sections.forEach((section) => observer.unobserve(section));
 		};
 	}, []);
-
 	return (
 		<div className="relative bg-gray-900 text-white min-h-screen flex flex-col md:flex-row overflow-hidden">
 			{/* Sidebar - Name, Position, and Titles */}
-			<aside className="w-full md:w-1/3 p-10 flex flex-col justify-around items-start md:fixed md:h-full">
-				<motion.div>
-					<motion.h1
-						className="text-4xl font-bold"
-						initial={{ opacity: 0, x: -20 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ duration: 0.8 }}
-					>
-						{title}
-					</motion.h1>
-					<motion.p
-						className="text-lg text-gray-400 mt-4 mb-10"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 1, delay: 0.5 }}
-					>
-						{position}
-					</motion.p>
-
-					<motion.div
-						className="ml-10 flex flex-col gap-4"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 1, delay: 0.5 }}
-					>
-						{tags.map((tag, index) => (
-							<a
-								key={index}
-								href={`#${tag.toLowerCase()}`}
-								className={`text-sm duration-300 font-semibold hidden md:block cursor-pointer ${
-									activeSection === tag.toLowerCase()
-										? 'text-white-500'
-										: 'text-slate-500'
-								}`}
-							>
-								{tag}
-							</a>
-						))}
-					</motion.div>
-				</motion.div>
-				<motion.div
-					className="ml-10 flex flex-col  gap-4"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 1, delay: 0.5 }}
-				>
-					<div className="flex flex-row gap-4">
-						{socials.map((social, index) => (
-							<a key={index} href={`${social.link}`} target="_blank">
-								<i className={`${social.icon} text-[40px]`}></i>
-							</a>
-						))}
-					</div>
-					<p className="text-slate-500 text-sm italic">
-						contact with me: phuquocfe@gmail.com
-					</p>
-				</motion.div>
-			</aside>
+			<SideBar activeSection={activeSection} />
 
 			{/* Main Content */}
 			<main className="w-full md:w-2/3 md:ml-auto p-6 md:p-10 md:mt-20">
@@ -100,7 +44,9 @@ export default function App() {
 					transition={{ duration: 0.8 }}
 					viewport={{ once: true }}
 				>
-					<p className="text-gray-300 mt-4 leading-[2]">{about}</p>
+					<p className="text-gray-300 mt-4 leading-[2]">
+						{<KeywordHighlighter content={about} />}
+					</p>
 				</motion.section>
 
 				{/* Projects Section */}
@@ -121,7 +67,7 @@ export default function App() {
 						type="project"
 						title="Noithatzone"
 						link="https://noithatzone.vn"
-						subContent={['Next.JS']}
+						subContent={['Next.JS', 'TailwindCSS']}
 					/>
 					<Card
 						content="This is my first freelance project, a website for selling hair wax, allowing users to view products and add them to the cart. The admin page allows the admin to manage products and check orders. The application is built with Next.JS and NestJS."
