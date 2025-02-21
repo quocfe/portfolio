@@ -1,10 +1,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Card from './components/Card';
-
-const title = 'Nguyen Phu Quoc';
-const position = 'Software Engineer | Node.JS | React.JS';
-const tags = ['About', 'Projects', 'Experience'];
+import { about, interests, position, socials, tags, title } from './constant';
 
 export default function App() {
 	const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -73,14 +70,21 @@ export default function App() {
 					</motion.div>
 				</motion.div>
 				<motion.div
-					className="ml-10 flex flex-row gap-4"
+					className="ml-10 flex flex-col  gap-4"
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ duration: 1, delay: 0.5 }}
 				>
-					<p>github</p>
-					<p>linked</p>
-					<p>instagram</p>
+					<div className="flex flex-row gap-4">
+						{socials.map((social, index) => (
+							<a key={index} href={`${social.link}`} target="_blank">
+								<i className={`${social.icon} text-[40px]`}></i>
+							</a>
+						))}
+					</div>
+					<p className="text-slate-500 text-sm italic">
+						contact with me: phuquocfe@gmail.com
+					</p>
 				</motion.div>
 			</aside>
 
@@ -96,25 +100,7 @@ export default function App() {
 					transition={{ duration: 0.8 }}
 					viewport={{ once: true }}
 				>
-					<p className="text-gray-300 mt-4 leading-[2]">
-						I’m a developer passionate about crafting accessible, pixel-perfect
-						user interfaces that blend thoughtful design with robust
-						engineering. My favorite work lies at the intersection of design and
-						development, creating experiences that not only look great but are
-						meticulously built for performance and usability. Currently, I'm a
-						Senior Front-End Engineer at Klaviyo, specializing in accessibility.
-						I contribute to the creation and maintenance of UI components that
-						power Klaviyo’s frontend, ensuring our platform meets web
-						accessibility standards and best practices to deliver an inclusive
-						user experience. In the past, I've had the opportunity to develop
-						software across a variety of settings — from advertising agencies
-						and large corporations to start-ups and small digital product
-						studios. Additionally, I also released a comprehensive video course
-						a few years ago, guiding learners through building a web app with
-						the Spotify API. In my spare time, I’m usually climbing, reading,
-						hanging out with my wife and two cats, or running around Hyrule
-						searching for Korok seeds K o r o k s e e d s .
-					</p>
+					<p className="text-gray-300 mt-4 leading-[2]">{about}</p>
 				</motion.section>
 
 				{/* Projects Section */}
@@ -130,7 +116,7 @@ export default function App() {
 						Projects
 					</h2>
 					<Card
-						content="Build and maintain critical components used to construct Klaviyo’s frontend, across the whole product. Work closely with cross-functional teams, including developers, designers, and product managers, to implement and advocate for best practices in web accessibility."
+						content="This is a freelance project, a blog website introducing interior products and providing interior design consultation. The website is built with Next.JS."
 						leftContent="/noithatzone.png"
 						type="project"
 						title="Noithatzone"
@@ -138,21 +124,30 @@ export default function App() {
 						subContent={['Next.JS']}
 					/>
 					<Card
-						content="Build and maintain critical components used to construct Klaviyo’s frontend, across the whole product. Work closely with cross-functional teams, including developers, designers, and product managers, to implement and advocate for best practices in web accessibility."
+						content="This is my first freelance project, a website for selling hair wax, allowing users to view products and add them to the cart. The admin page allows the admin to manage products and check orders. The application is built with Next.JS and NestJS."
 						leftContent="10/2024 - Present"
 						type="experience"
 						title="Powerkeentrend"
 						subContent={['Next.JS', 'Nest.JS']}
 					/>
 					<Card
-						content="This is graduation project. The project is a social network for developers. It allows developers to create a profile/portfolio, share posts, and get help from other developers. The project is built with the MERN stack and Redux for state management."
+						content="This is my graduation project, a social networking website that allows users to log in, create posts, interact with other users' posts, and perform other basic operations. The application is built with React.JS and Express.JS."
 						leftContent="05/2024 – 09/2024"
 						type="experience"
 						title="DevBook"
 						subContent={['React.JS', 'Express.JS']}
 					/>
+					<Card
+						content="I am a book lover, and I enjoy writing reviews about the books I have read. Therefore, I built a web application that allows users to log in, search for books, and write reviews about them. The application is built with React.JS and Express.JS."
+						leftContent="10/2024 – 12/2024"
+						type="experience"
+						link="https://bookstore-frontend-wheat.vercel.app"
+						title="Book Review"
+						subContent={['React.JS', 'Express.JS']}
+					/>
 				</motion.section>
 
+				{/* Experience Section */}
 				<motion.section
 					id="experience"
 					className="mt-10 max-w-4xl"
@@ -173,8 +168,29 @@ export default function App() {
 						subContent={['Da Nang']}
 					/>
 				</motion.section>
-
-				{/* Experience Section */}
+				{/*  */}
+				<motion.section
+					id="interests"
+					className="mt-10 max-w-4xl"
+					initial={{ opacity: 0, y: 50 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.8 }}
+					viewport={{ once: true }}
+				>
+					<h2 className="text-xl font-bold uppercase tracking-widest text-slate-200 mb-6">
+						Interests
+					</h2>
+					<ul className="flex flex-wrap gap-2">
+						{interests.map((item, index) => (
+							<li
+								key={index}
+								className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300 "
+							>
+								{item}
+							</li>
+						))}
+					</ul>
+				</motion.section>
 			</main>
 		</div>
 	);

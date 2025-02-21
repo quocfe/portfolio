@@ -3,3 +3,8 @@
 :root {
 	scroll-behavior: smooth;
 }
+
+::selection {
+	background-color: #87d1d4;
+	color: #908888; /* Màu chữ đen */
+}

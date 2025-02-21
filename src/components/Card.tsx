@@ -12,13 +12,15 @@ function Card(props: Props) {
 	const { leftContent, title, type, content, subContent, link } = props;
 	return (
 		<div className="mb-12 flex flex-col md:flex-row gap-6 md:gap-10">
-			<div className="w-[30%]">
+			<div className="w-[30%] overflow-hidden ">
 				{type === 'project' ? (
-					<img
-						src={leftContent}
-						alt={title}
-						className="w-full h-auto rounded"
-					/>
+					<div className="h-fit overflow-hidden rounded">
+						<img
+							src={leftContent}
+							alt={title}
+							className="w-full h-auto rounded shadow-lg object-center"
+						/>
+					</div>
 				) : (
 					<p className="font-semibold uppercase tracking-wide text-slate-500 text-sm">
 						{leftContent}
